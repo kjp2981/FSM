@@ -16,6 +16,11 @@ public class AIBrain : MonoBehaviour
 
     public List<ConditionPair> GlobalTransition;
 
+    public void SetTarget(GameObject target)
+    {
+        _target = target;
+    }
+
     public AIState GetCurrentState()
     {
         return _currentState;
@@ -77,37 +82,44 @@ public class AIBrain : MonoBehaviour
             }
         }
 
-        foreach (ConditionPair pair in _currentState._transitionList)
-        {
-            bool isTransition = true;
-            for (int i = 0; i < pair.conditionList.Count; i++)
-            {
-                if (pair.conditionList[i].IfCondition(_currentState, pair.nextState))
-                {
-                    isTransition = true;
-                }
-                else isTransition = false;
-            }
-
-            if (isTransition == true)
-            {
-                if (nextCondition == null)
-                {
-                    nextCondition = pair;
-                }
-                else
-                {
-                    if (pair.priority > nextCondition.priority)
-                    {
-                        nextCondition = pair;
-                    }
-                }
-            }
-        }
-
         if (nextCondition != null)
         {
             ChangeState(nextCondition.nextState);
+        }
+        else
+        {
+            foreach (ConditionPair pair in _currentState._transitionList)
+            {
+                bool isTransition = true;
+                for (int i = 0; i < pair.conditionList.Count; i++)
+                {
+                    if (pair.conditionList[i].IfCondition(_currentState, pair.nextState))
+                    {
+                        isTransition = true;
+                    }
+                    else isTransition = false;
+                }
+
+                if (isTransition == true)
+                {
+                    if (nextCondition == null)
+                    {
+                        nextCondition = pair;
+                    }
+                    else
+                    {
+                        if (pair.priority > nextCondition.priority)
+                        {
+                            nextCondition = pair;
+                        }
+                    }
+                }
+            }
+
+            if (nextCondition != null)
+            {
+                ChangeState(nextCondition.nextState);
+            }
         }
     }
 }
