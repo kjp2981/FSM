@@ -13,6 +13,9 @@ public class AIBrain : MonoBehaviour
     private AIState _beforeState;
     [SerializeField]
     private AIState _currentState;
+    
+    private float stateDuractionTime = 0f;
+    public float StateDuractionTime => stateDuractionTime;
 
     public List<ConditionPair> GlobalTransition;
 
@@ -44,6 +47,7 @@ public class AIBrain : MonoBehaviour
         if (_target != null)
         {
             _currentState.TakeAAction();
+            stateDuractionTime += Time.deltaTime;
         }
         else
         {
