@@ -13,7 +13,7 @@ public class AIBrain : MonoBehaviour
     private AIState _beforeState;
     [SerializeField]
     private AIState _currentState;
-    
+
     private float stateDuractionTime = 0f;
     public float StateDuractionTime => stateDuractionTime;
 
@@ -31,13 +31,17 @@ public class AIBrain : MonoBehaviour
 
     public void ChangeState(AIState state)
     {
+        if (_currentState == state)
+            return;
+
+        stateDuractionTime = 0f;
         _beforeState = _currentState;
         _beforeState.OnStateLeave();
         _currentState = state;
         _currentState.OnStateEnter();
     }
 
-    private void Awake()
+    private void Start()
     {
         _currentState.OnStateEnter();
     }
@@ -58,16 +62,20 @@ public class AIBrain : MonoBehaviour
     private void LateUpdate()
     {
         ConditionPair nextCondition = null;
-        foreach(ConditionPair pair in GlobalTransition)
+        foreach (ConditionPair pair in GlobalTransition)
         {
-            bool isTransition = true;
+            bool isTransition = false;
             for (int i = 0; i < pair.conditionList.Count; i++)
             {
-                if (pair.conditionList[i].IfCondition(_currentState, pair.nextState))
+                if (pair.conditionList[i].IfCondition(_currentState, pair.nextState) == true)
                 {
                     isTransition = true;
                 }
-                else isTransition = false;
+                else
+                {
+                    isTransition = false;
+                    break;
+                }
             }
 
             if (isTransition == true)
@@ -94,14 +102,18 @@ public class AIBrain : MonoBehaviour
         {
             foreach (ConditionPair pair in _currentState._transitionList)
             {
-                bool isTransition = true;
+                bool isTransition = false;
                 for (int i = 0; i < pair.conditionList.Count; i++)
                 {
-                    if (pair.conditionList[i].IfCondition(_currentState, pair.nextState))
+                    if (pair.conditionList[i].IfCondition(_currentState, pair.nextState) == true)
                     {
                         isTransition = true;
                     }
-                    else isTransition = false;
+                    else
+                    {
+                        isTransition = false;
+                        break;
+                    }
                 }
 
                 if (isTransition == true)
