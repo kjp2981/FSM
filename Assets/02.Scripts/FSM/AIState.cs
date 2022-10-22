@@ -12,20 +12,18 @@ public class ConditionPair
 
 public abstract class AIState : MonoBehaviour
 {
-    protected float stateDurationTime = 0f;
-    public float StateDurationTime => stateDurationTime;
+    protected AIBrain _aiBrain = null;
 
     public List<ConditionPair> _transitionList;
 
-    public virtual void OnStateEnter()
+    protected virtual void Start()
     {
-        stateDurationTime = 0f;
+        _aiBrain = GetComponentInParent<AIBrain>();
     }
 
-    public virtual void OnStateLeave()
-    {
-        stateDurationTime = 0f;
-    }
+    public virtual void OnStateEnter() { }
+
+    public virtual void OnStateLeave() { }
 
     public abstract void TakeAAction();
 }
