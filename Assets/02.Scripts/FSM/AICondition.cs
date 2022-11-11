@@ -6,7 +6,7 @@ public abstract class AICondition : MonoBehaviour
 {
     protected AIBrain _aiBrain;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         _aiBrain = GetComponentInParent<AIBrain>();
     }

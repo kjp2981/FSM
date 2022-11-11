@@ -3,20 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class ConditionAndNot
+{
+    public AICondition condition;
+    public bool not;
+}
+
+[System.Serializable]
 public class ConditionPair
 {
-    public List<AICondition> conditionList;
+    public List<ConditionAndNot> conditionList;
     public AIState nextState;
     public int priority;
 }
 
 public abstract class AIState : MonoBehaviour
 {
-    protected AIBrain _aiBrain = null;
+    protected AIBrain _aiBrain;
 
     public List<ConditionPair> _transitionList;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         _aiBrain = GetComponentInParent<AIBrain>();
     }
