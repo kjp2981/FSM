@@ -82,7 +82,9 @@ public class AIBrain : MonoBehaviour
             bool isTransition = false;
             for (int i = 0; i < pair.conditionList.Count; i++)
             {
-                if (pair.conditionList[i].condition.IfCondition(_currentState, pair.nextState) == (pair.conditionList[i].not == true ? false : true))
+                if (pair.conditionList[i[.condition == null) continue;
+                
+                if (pair.conditionList[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.conditionList[i].not == true)
                 {
                     isTransition = true;
                 }
@@ -122,7 +124,9 @@ public class AIBrain : MonoBehaviour
                 bool isTransition = false;
                 for (int i = 0; i < pair.conditionList.Count; i++)
                 {
-                    if (pair.conditionList[i].condition.IfCondition(_currentState, pair.nextState) == (pair.conditionList[i].not == true ? false : true))
+                    if (pair.conditionList[i[.condition == null) continue;
+                
+                    if (pair.conditionList[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.conditionList[i].not == true)
                     {
                         isTransition = true;
                     }
