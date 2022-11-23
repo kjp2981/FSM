@@ -12,7 +12,7 @@ public class ConditionAndNot
 [System.Serializable]
 public class ConditionPair
 {
-    public List<ConditionAndNot> conditionList;
+    public List<ConditionAndNot> conditionAndNotList;
     public AIState nextState;
     public int priority;
 }

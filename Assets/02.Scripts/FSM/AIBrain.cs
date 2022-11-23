@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class AIBrain : MonoBehaviour
 {
-    //private List<AIState> _stateList;
-
     [SerializeField]
     private GameObject _target;
     public GameObject Target => _target;
@@ -13,9 +11,6 @@ public class AIBrain : MonoBehaviour
     private AIState _beforeState;
     [SerializeField]
     private AIState _currentState;
-
-    private GameObject _parentObject;
-    public GameObject ParentObject => _parentObject;
 
     private float stateDuractionTime = 0f;
     public float StateDuractionTime => stateDuractionTime;
@@ -49,11 +44,6 @@ public class AIBrain : MonoBehaviour
         _currentState.OnStateEnter();
     }
 
-    private void Awake()
-    {
-        _parentObject = transform.parent.gameObject;
-    }
-
     private void Start()
     {
         _currentState.OnStateEnter();
@@ -77,14 +67,14 @@ public class AIBrain : MonoBehaviour
         ConditionPair nextCondition = null;
         foreach (ConditionPair pair in GlobalTransition)
         {
-            if (pair.conditionList.Count == 0) continue;
+            if (pair.conditionAndNotList.Count == 0) continue;
 
             bool isTransition = false;
-            for (int i = 0; i < pair.conditionList.Count; i++)
+            for (int i = 0; i < pair.conditionAndNotList.Count; i++)
             {
-                if (pair.conditionList[i[.condition == null) continue;
+                if (pair.conditionAndNotList[i].condition == null) continue;
                 
-                if (pair.conditionList[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.conditionList[i].not == true)
+                if (pair.conditionAndNotList[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.conditionAndNotList[i].not == true)
                 {
                     isTransition = true;
                 }
@@ -119,14 +109,14 @@ public class AIBrain : MonoBehaviour
         {
             foreach (ConditionPair pair in _currentState._transitionList)
             {
-                if (pair.conditionList.Count == 0) continue;
+                if (pair.conditionAndNotList.Count == 0) continue;
 
                 bool isTransition = false;
-                for (int i = 0; i < pair.conditionList.Count; i++)
+                for (int i = 0; i < pair.conditionAndNotList.Count; i++)
                 {
-                    if (pair.conditionList[i[.condition == null) continue;
+                    if (pair.conditionAndNotList[i].condition == null) continue;
                 
-                    if (pair.conditionList[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.conditionList[i].not == true)
+                    if (pair.conditionAndNotList[i].condition.IfCondition(_currentState, pair.nextState) ^ pair.conditionAndNotList[i].not == true)
                     {
                         isTransition = true;
                     }

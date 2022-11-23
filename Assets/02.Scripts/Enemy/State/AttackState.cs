@@ -28,7 +28,7 @@ public class AttackState : AIState
         if(attackTimer >= attackDelay)
         {
             IHittable hit = _aiBrain.Target.GetComponent<IHittable>();
-            hit?.Damage(damage, )
+            hit?.Damage(damage, this.gameObject);
         }
     }
 }
