@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InTargetCondition : AICondition
+public class DistanceCondition : AICondition
 {
     [SerializeField]
     private float _distance;
