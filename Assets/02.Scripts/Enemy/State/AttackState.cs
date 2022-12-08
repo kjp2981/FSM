@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AttackState : AIState
 {
@@ -11,9 +12,18 @@ public class AttackState : AIState
 
     private float attackTimer = 0f;
 
+    private NavMeshAgent agent;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        agent = GetComponentInParent<NavMeshAgent>();
+    }
+
     public override void OnStateEnter()
     {
-        attackTimer = 0f;
+        agent.isStopped = true;
+        attackTimer = attackDelay;
     }
 
     public override void OnStateLeave()

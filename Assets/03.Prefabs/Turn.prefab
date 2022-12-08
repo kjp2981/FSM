@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3950960134100145737}
   - component: {fileID: 3950960134100145736}
   - component: {fileID: 3950960134100145739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 3950960135184817779}
   - component: {fileID: 3950960135184817778}
   - component: {fileID: 3950960135184817781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Wall (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,7 +203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3950960135339929600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Turn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
